@@ -1,0 +1,12 @@
+{
+  "name": "nextqueue-system",
+  "version": "1.0.0",
+  "description": "Multi-Tenant Multi-Service Queue & QR Tracking System",
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build"
+  }
+}
+

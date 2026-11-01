@@ -1,0 +1,429 @@
+{
+  "tenants": [
+    {
+      "id": "clinica-sao-rafael",
+      "slug": "clinica-sao-rafael",
+      "name": "Hospital & Centro Clínico São Rafael",
+      "tagline": "Pronto Atendimento & Consultas Especializadas",
+      "theme_color": "#0d9488",
+      "buffer_type": "fixed_minutes",
+      "buffer_value": 10,
+      "contact_phone": "(11) 3456-7890",
+      "address": "Av. Paulista, 1500 - São Paulo, SP",
+      "created_at": "2026-10-31T20:01:12.049Z"
+    },
+    {
+      "id": "clinica-saude-total",
+      "slug": "clinica-saude-total",
+      "name": "Clínica Integrada Saúde Total",
+      "tagline": "Atendimento Rápido e Humanizado",
+      "theme_color": "#2563eb",
+      "buffer_type": "percentage",
+      "buffer_value": 20,
+      "contact_phone": "(21) 2233-4455",
+      "address": "Rua das Laranjeiras, 300 - Rio de Janeiro, RJ",
+      "created_at": "2026-10-31T20:01:12.050Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "serv-pa",
+      "tenant_id": "clinica-sao-rafael",
+      "name": "Pronto Atendimento (PA)",
+      "description": "Atendimento de urgência e emergência adulto e pediátrico",
+      "code_prefix": "PA",
+      "active": true,
+      "stages": [
+        "stg-triagem",
+        "stg-consulta",
+        "stg-exames",
+        "stg-alta"
+      ]
+    },
+    {
+      "id": "serv-ambulatorio",
+      "tenant_id": "clinica-sao-rafael",
+      "name": "Consultório Especializado / Eletivo",
+      "description": "Consultas agendadas com especialistas (Cardio, Ortopedia, Geral)",
+      "code_prefix": "MED",
+      "active": true,
+      "stages": [
+        "stg-recepcao",
+        "stg-consulta",
+        "stg-alta"
+      ]
+    },
+    {
+      "id": "serv-lab",
+      "tenant_id": "clinica-saude-total",
+      "name": "Exames & Diagnósticos Rápidos",
+      "description": "Coletas laboratoriais e imagens",
+      "code_prefix": "LAB",
+      "active": true,
+      "stages": [
+        "stg-lab-recepcao",
+        "stg-lab-coleta",
+        "stg-lab-entrega"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "stg-triagem",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "step_order": 1,
+      "name": "Triagem & Classificação de Risco",
+      "counter_label": "Sala de Triagem / Enfermagem",
+      "default_avg_minutes": 8,
+      "color": "#3b82f6",
+      "icon": "Activity",
+      "description": "Aferição de sinais vitais, pressão, saturação e protocolo de Manchester",
+      "allow_notes": true,
+      "can_skip": false
+    },
+    {
+      "id": "stg-consulta",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "step_order": 2,
+      "name": "Consulta Médica",
+      "counter_label": "Consultório Médico",
+      "default_avg_minutes": 18,
+      "color": "#10b981",
+      "icon": "Stethoscope",
+      "description": "Avaliação clínica completa pelo médico plantonista e conduta terapêutica",
+      "allow_notes": true,
+      "can_skip": false
+    },
+    {
+      "id": "stg-exames",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "step_order": 3,
+      "name": "Exames Rápidos / Medicação",
+      "counter_label": "Sala de Procedimentos & Medicação",
+      "default_avg_minutes": 20,
+      "color": "#f59e0b",
+      "icon": "FlaskConical",
+      "description": "Administração de soro/medicação injetável ou exames complementares",
+      "allow_notes": true,
+      "can_skip": true
+    },
+    {
+      "id": "stg-alta",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "step_order": 4,
+      "name": "Conclusão & Alta Médica",
+      "counter_label": "Recepção de Alta / Farmácia",
+      "default_avg_minutes": 5,
+      "color": "#8b5cf6",
+      "icon": "CheckCircle2",
+      "description": "Liberação do paciente, entrega de receitas, atestados e orientações",
+      "allow_notes": true,
+      "can_skip": false
+    },
+    {
+      "id": "stg-recepcao",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-ambulatorio",
+      "step_order": 1,
+      "name": "Acolhimento & Cadastro",
+      "counter_label": "Guichê de Atendimento",
+      "default_avg_minutes": 5,
+      "color": "#6366f1",
+      "icon": "UserCheck",
+      "description": "Conferência de documentos e abertura de prontuário",
+      "allow_notes": false,
+      "can_skip": false
+    },
+    {
+      "id": "stg-lab-recepcao",
+      "tenant_id": "clinica-saude-total",
+      "service_id": "serv-lab",
+      "step_order": 1,
+      "name": "Check-in e Guia",
+      "counter_label": "Guichê Laboratorial",
+      "default_avg_minutes": 6,
+      "color": "#06b6d4",
+      "icon": "FileText",
+      "description": "Validação do pedido médico",
+      "allow_notes": false,
+      "can_skip": false
+    },
+    {
+      "id": "stg-lab-coleta",
+      "tenant_id": "clinica-saude-total",
+      "service_id": "serv-lab",
+      "step_order": 2,
+      "name": "Coleta de Amostras",
+      "counter_label": "Box de Coleta",
+      "default_avg_minutes": 10,
+      "color": "#f97316",
+      "icon": "Syringe",
+      "description": "Coleta de sangue e materiais biológicos",
+      "allow_notes": true,
+      "can_skip": false
+    },
+    {
+      "id": "stg-lab-entrega",
+      "tenant_id": "clinica-saude-total",
+      "service_id": "serv-lab",
+      "step_order": 3,
+      "name": "Finalização & Protocolo",
+      "counter_label": "Recepção de Saída",
+      "default_avg_minutes": 4,
+      "color": "#10b981",
+      "icon": "CheckCircle2",
+      "description": "Entrega do protocolo de resultados online",
+      "allow_notes": false,
+      "can_skip": false
+    }
+  ],
+  "tickets": [
+    {
+      "id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_817f5671",
+      "tracking_url": "http://localhost:5173/track/tk_817f5671",
+      "display_code": "PA-001",
+      "customer_name": "Jo�o da Silva",
+      "customer_phone": "",
+      "priority": "preferencial",
+      "current_stage_id": "stg-alta",
+      "current_stage_order": 4,
+      "status": "completed",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-10-31T20:06:28.805Z",
+      "updated_at": "2026-10-31T20:07:23.037Z",
+      "completed_at": "2026-10-31T20:07:23.037Z",
+      "clinical_notes": [
+        {
+          "stage_id": "stg-triagem",
+          "stage_name": "Triagem & Classificação de Risco",
+          "operator": "Enf� Mariana Souza",
+          "counter": "Sala de Triagem 01",
+          "notes": "PA: 130x85 mmHg, FC: 76 bpm, Temp: 36.4C. Queixa de tosse e dor no peito leve. Classifica��o Manchester: Amarelo.",
+          "timestamp": "2026-10-31T20:06:44.885Z"
+        },
+        {
+          "stage_id": "stg-consulta",
+          "stage_name": "Consulta Médica",
+          "operator": "Dr. Roberto Santos",
+          "counter": "Consult�rio M�dico 03",
+          "notes": "Receitado antibi�tico e repouso de 3 dias. Encaminhado direto para alta m�dica.",
+          "timestamp": "2026-10-31T20:07:16.156Z"
+        },
+        {
+          "stage_id": "stg-alta",
+          "stage_name": "Conclusão & Alta Médica",
+          "operator": "Profissional",
+          "counter": "Sala",
+          "notes": "Receitas e atestados entregues, paciente liberado.",
+          "timestamp": "2026-10-31T20:07:23.036Z"
+        }
+      ]
+    },
+    {
+      "id": "tkt-77946601",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_a388a9da",
+      "tracking_url": "http://192.168.1.12:5000/track/tk_a388a9da",
+      "display_code": "PA-002",
+      "customer_name": "Teste QR Celular",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-triagem",
+      "current_stage_order": 1,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-10-31T20:09:01.801Z",
+      "updated_at": "2026-10-31T20:09:01.801Z",
+      "completed_at": null,
+      "clinical_notes": []
+    }
+  ],
+  "ticket_events": [
+    {
+      "id": "evt-1793477188805-ewocq0",
+      "timestamp": "2026-10-31T20:06:28.805Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-001",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "preferencial",
+        "message": "Ticket PA-001 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793477196880-ptz06h",
+      "timestamp": "2026-10-31T20:06:36.880Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem 01",
+        "operator": "Enf� Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-001 chamado para Sala de Triagem 01 (Enf� Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793477204885-fz4im0",
+      "timestamp": "2026-10-31T20:06:44.885Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "PA: 130x85 mmHg, FC: 76 bpm, Temp: 36.4C. Queixa de tosse e dor no peito leve. Classifica��o Manchester: Amarelo.",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793477204886-irr6f7",
+      "timestamp": "2026-10-31T20:06:44.886Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793477228211-hybqv1",
+      "timestamp": "2026-10-31T20:07:08.211Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Consult�rio M�dico 03",
+        "operator": "Dr. Roberto Santos",
+        "stage_name": "Consulta Médica",
+        "call_count": 1,
+        "message": "PA-001 chamado para Consult�rio M�dico 03 (Dr. Roberto Santos)"
+      }
+    },
+    {
+      "id": "evt-1793477236156-m9453a",
+      "timestamp": "2026-10-31T20:07:16.156Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Consulta Médica",
+        "durationMinutes": 1,
+        "notes": "Receitado antibi�tico e repouso de 3 dias. Encaminhado direto para alta m�dica.",
+        "message": "Etapa Consulta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793477236157-6jpppm",
+      "timestamp": "2026-10-31T20:07:16.157Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Consulta Médica",
+        "next_stage": "Conclusão & Alta Médica",
+        "message": "Encaminhado para a fila de Conclusão & Alta Médica"
+      }
+    },
+    {
+      "id": "evt-1793477243036-tw80f8",
+      "timestamp": "2026-10-31T20:07:23.036Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Conclusão & Alta Médica",
+        "durationMinutes": 1,
+        "notes": "Receitas e atestados entregues, paciente liberado.",
+        "message": "Etapa Conclusão & Alta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793477243037-i548kr",
+      "timestamp": "2026-10-31T20:07:23.037Z",
+      "ticket_id": "tkt-951634df",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_COMPLETED",
+      "payload": {
+        "totalStages": 4,
+        "message": "Atendimento integralmente concluído com sucesso!"
+      }
+    },
+    {
+      "id": "evt-1793477341802-vnlbju",
+      "timestamp": "2026-10-31T20:09:01.802Z",
+      "ticket_id": "tkt-77946601",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-002",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-002 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    }
+  ],
+  "operators": [
+    {
+      "id": "op-1",
+      "tenant_id": "clinica-sao-rafael",
+      "name": "Enfª. Mariana Souza",
+      "role": "Triagem",
+      "default_counter": "Sala de Triagem 01"
+    },
+    {
+      "id": "op-2",
+      "tenant_id": "clinica-sao-rafael",
+      "name": "Dr. Roberto Santos",
+      "role": "Médico",
+      "default_counter": "Consultório 03"
+    },
+    {
+      "id": "op-3",
+      "tenant_id": "clinica-sao-rafael",
+      "name": "Dra. Beatriz Lima",
+      "role": "Médico",
+      "default_counter": "Consultório 05"
+    },
+    {
+      "id": "op-4",
+      "tenant_id": "clinica-sao-rafael",
+      "name": "Téc. Fernando Alves",
+      "role": "Procedimentos",
+      "default_counter": "Sala de Medicação"
+    }
+  ]
+}
