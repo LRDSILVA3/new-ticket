@@ -2,6 +2,10 @@
 node_modules/
 */node_modules/
 
+# Tools & Binaries
+tools/
+*.exe
+
 # Production builds
 dist/
 frontend/dist/
@@ -30,4 +34,3 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
-

@@ -252,6 +252,75 @@
       "updated_at": "2026-10-31T20:09:01.801Z",
       "completed_at": null,
       "clinical_notes": []
+    },
+    {
+      "id": "tkt-be04b569",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_e664ca16",
+      "tracking_url": "http://192.168.1.12:5000/track/tk_e664ca16",
+      "display_code": "PA-001",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-triagem",
+      "current_stage_order": 1,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T22:17:52.772Z",
+      "updated_at": "2026-11-01T22:17:52.772Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-0db722ec",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_80d033b3",
+      "tracking_url": "http://192.168.1.12:5000/track/tk_80d033b3",
+      "display_code": "PA-002",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-triagem",
+      "current_stage_order": 1,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T22:18:33.282Z",
+      "updated_at": "2026-11-01T22:18:33.282Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-0679b1c5",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_2470a05c",
+      "tracking_url": "https://coated-professional-officer-java.trycloudflare.com/track/tk_2470a05c",
+      "display_code": "PA-003",
+      "customer_name": "Teste Cloudflare Publico",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-triagem",
+      "current_stage_order": 1,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T22:22:05.133Z",
+      "updated_at": "2026-11-01T22:22:05.133Z",
+      "completed_at": null,
+      "clinical_notes": []
     }
   ],
   "ticket_events": [
@@ -393,6 +462,51 @@
         "initial_stage_name": "Triagem & Classificação de Risco",
         "priority": "normal",
         "message": "Ticket PA-002 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793571472774-yrvnzw",
+      "timestamp": "2026-11-01T22:17:52.774Z",
+      "ticket_id": "tkt-be04b569",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-001",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-001 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793571513282-5lpxb7",
+      "timestamp": "2026-11-01T22:18:33.282Z",
+      "ticket_id": "tkt-0db722ec",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-002",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-002 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793571725135-kw2j89",
+      "timestamp": "2026-11-01T22:22:05.135Z",
+      "ticket_id": "tkt-0679b1c5",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-003",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-003 emitido com sucesso para Triagem & Classificação de Risco"
       }
     }
   ],

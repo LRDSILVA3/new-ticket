@@ -56,10 +56,21 @@ module.exports = function (io, wsHub) {
       // Generate secure unique tracking token
       const trackingToken = `tk_${uuidv4().replace(/-/g, '').slice(0, 8)}`;
 
-      // Frontend tracking URL encoded in the QR code (auto-detects LAN IP so real phones on Wi-Fi can scan)
-      const port = process.env.PORT || 5000;
-      const hostIp = (req.hostname === 'localhost' || req.hostname === '127.0.0.1') ? getLocalIp() : req.hostname;
-      const clientUrl = process.env.CLIENT_URL || `http://${hostIp}:${port}`;
+      // Frontend tracking URL encoded in the QR code:
+      // If accessed via Cloudflare Tunnel / public domain, use that public HTTPS URL!
+      // Otherwise fallback to local Wi-Fi IP.
+      let clientUrl = process.env.CLIENT_URL;
+      if (!clientUrl) {
+        const forwardedHost = req.headers['x-forwarded-host'] || req.headers.host;
+        const forwardedProto = req.headers['x-forwarded-proto'] || (req.secure ? 'https' : 'http');
+        if (forwardedHost && !forwardedHost.includes('localhost') && !forwardedHost.includes('127.0.0.1')) {
+          clientUrl = `${forwardedProto}://${forwardedHost}`;
+        } else {
+          const hostIp = getLocalIp();
+          const port = process.env.PORT || 5000;
+          clientUrl = `http://${hostIp}:${port}`;
+        }
+      }
       const trackingUrl = `${clientUrl}/track/${trackingToken}`;
 
       // Generate QR Code data URL
