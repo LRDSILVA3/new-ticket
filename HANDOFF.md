@@ -148,3 +148,4 @@ new-ticket/
    * Envio direto de comando de impressão térmica ESC/POS para impressoras de balcão (Epson, Bematech, Elgin).
 4. **Relatórios de SLA e Gargalos:**
    * Gráficos adicionais de tempo médio real de permanência em cada sala para a diretoria clínica.
+
