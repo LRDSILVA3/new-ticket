@@ -3,6 +3,7 @@ import { getSocket } from '../utils/socket';
 import { api } from '../utils/api';
 import { soundManager } from '../utils/sound';
 import confetti from 'canvas-confetti';
+import { pipManager } from '../utils/pipManager';
 import { 
   Activity, 
   Clock, 
@@ -20,7 +21,9 @@ import {
   Star,
   MapPin,
   RefreshCw,
-  Sparkles
+  Sparkles,
+  ExternalLink,
+  Pin
 } from 'lucide-react';
 
 const iconMap = {
@@ -43,6 +46,9 @@ export default function MobileTracker({ initialToken }) {
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [lastCalledStage, setLastCalledStage] = useState(null);
   const [showWaitDetails, setShowWaitDetails] = useState(false);
+  const [pipActive, setPipActive] = useState(false);
+  const [showPipPrompt, setShowPipPrompt] = useState(true);
+  const [pipLoading, setPipLoading] = useState(false);
 
   const socketRef = useRef(null);
 
@@ -82,14 +88,68 @@ export default function MobileTracker({ initialToken }) {
     const socket = getSocket();
     socketRef.current = socket;
 
-    // Join the private ticket room (triggers QR_TRACKER_OPENED event on server)
-    socket.emit('join_ticket', { 
-      trackingToken: token,
-      userAgent: navigator.userAgent
-    });
+    // Join the private ticket room (on connect and reconnect)
+    const joinRoom = () => {
+      console.log('[MobileTracker] Joining room for token:', token);
+      socket.emit('join_ticket', { 
+        trackingToken: token,
+        userAgent: navigator.userAgent
+      });
+    };
+
+    if (socket.connected) {
+      joinRoom();
+    }
+    socket.on('connect', joinRoom);
+
+    // Continuous 3-second fallback polling (ensures mobile updates even if websocket reconnects or screen dimmed)
+    const pollInterval = setInterval(() => {
+      api.trackTicket(token)
+        .then(freshData => {
+          setTicketData(prev => {
+            if (!prev) return freshData;
+            const wasCalled = prev.ticket?.status === 'called';
+            const isNowCalled = freshData.ticket?.status === 'called';
+            const prevCalls = prev.ticket?.call_count || 0;
+            const newCalls = freshData.ticket?.call_count || 0;
+
+            if ((!wasCalled && isNowCalled) || (isNowCalled && newCalls > prevCalls)) {
+              console.log('[MobileTracker] Call detected via polling fallback!');
+              soundManager.playUrgentChime();
+              soundManager.vibrate();
+              soundManager.speakCall(freshData.ticket.display_code, freshData.ticket.assigned_counter);
+              setLastCalledStage(freshData.ticket.assigned_counter);
+            }
+
+            return freshData;
+          });
+        })
+        .catch(() => {});
+    }, 3000);
 
     socket.on('ticket_snapshot', (data) => {
       setTicketData(data);
+    });
+
+    socket.on('ticket_called', (data) => {
+      console.log('[MobileTracker] TICKET_CALLED received:', data);
+      setTicketData(prev => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          ticket: {
+            ...prev.ticket,
+            ...data.ticket,
+            status: 'called',
+            assigned_counter: data.counter,
+            call_count: data.call_count
+          }
+        };
+      });
+      soundManager.playUrgentChime();
+      soundManager.vibrate();
+      soundManager.speakCall(data.ticket.display_code, data.counter);
+      setLastCalledStage(data.counter);
     });
 
     socket.on('ticket_updated', (data) => {
@@ -124,7 +184,10 @@ export default function MobileTracker({ initialToken }) {
     });
 
     return () => {
+      clearInterval(pollInterval);
+      socket.off('connect', joinRoom);
       socket.off('ticket_snapshot');
+      socket.off('ticket_called');
       socket.off('ticket_updated');
       socket.off('queue_position_updated');
     };
@@ -135,6 +198,31 @@ export default function MobileTracker({ initialToken }) {
     soundManager.init();
     soundManager.playChime();
     setAudioEnabled(true);
+  };
+
+
+  // Update floating PiP scoreboard whenever ticket changes
+  useEffect(() => {
+    if (ticketData && pipActive) {
+      pipManager.updateData(ticketData);
+    }
+  }, [ticketData, pipActive]);
+
+  const handleEnablePiP = async () => {
+    if (!ticketData) return;
+    try {
+      setPipLoading(true);
+      await pipManager.enableFloatingBadge(ticketData);
+      setPipActive(true);
+      setShowPipPrompt(false);
+      setAudioEnabled(true);
+      setPipLoading(false);
+    } catch (err) {
+      console.warn('PiP could not be opened:', err);
+      setAudioEnabled(true);
+      setShowPipPrompt(false);
+      setPipLoading(false);
+    }
   };
 
   const priorityBadge = (priority) => {
@@ -186,43 +274,129 @@ export default function MobileTracker({ initialToken }) {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col max-w-md mx-auto relative shadow-2xl border-x border-slate-800/60 pb-16">
       {/* Real-time connection & audio bar */}
-      <div className="bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center justify-between text-xs backdrop-blur-md sticky top-0 z-30">
-        <div className="flex items-center gap-2">
+      <div className="bg-slate-900/95 border-b border-slate-800 px-3 py-2 flex items-center justify-between text-xs backdrop-blur-md sticky top-0 z-30 shadow-md">
+        <div className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span className="text-emerald-400 font-medium">Ao vivo via WebSocket</span>
+          <span className="text-emerald-400 font-bold text-[11px]">Ao vivo</span>
         </div>
-        {!audioEnabled ? (
-          <button 
-            onClick={handleEnableAudio}
-            className="flex items-center gap-1.5 px-2.5 py-1 bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-lg text-[11px] font-semibold border border-teal-500/30 transition-all"
+
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={handleEnablePiP}
+            disabled={pipLoading}
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-extrabold border transition-all cursor-pointer ${
+              pipActive 
+                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' 
+                : 'bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-200 border-indigo-500/40 shadow-sm'
+            }`}
+            title="Fixar balão flutuante na tela"
           >
-            <Volume2 className="w-3.5 h-3.5 text-teal-400" /> Ativar Som de Chamada
+            <Pin className="w-3 h-3" />
+            {pipActive ? 'Balão Ativo 🟢' : 'Fixar Balão 📌'}
           </button>
-        ) : (
-          <span className="text-slate-400 flex items-center gap-1 text-[11px]">
-            <Volume2 className="w-3 h-3 text-emerald-400" /> Alerta sonoro ativo
-          </span>
-        )}
+
+          {!audioEnabled && (
+            <button 
+              onClick={handleEnableAudio}
+              className="flex items-center gap-1 px-2 py-1 bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-lg text-[11px] font-bold border border-teal-500/30 transition-all cursor-pointer"
+            >
+              <Volume2 className="w-3 h-3 text-teal-400" /> Som
+            </button>
+          )}
+        </div>
       </div>
 
+      {/* Floating Scoreboard Modal Dialog Prompt */}
+      {showPipPrompt && !pipActive && ticket.status !== 'completed' && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="w-full max-w-sm bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 border border-indigo-500/40 rounded-3xl p-6 shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="absolute top-0 right-0 w-36 h-36 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 shadow-inner">
+                <Sparkles className="w-6 h-6 animate-pulse" />
+              </div>
+              <div>
+                <span className="text-[10px] uppercase font-extrabold tracking-wider text-indigo-400">Recurso Inteligente</span>
+                <h3 className="text-base font-black text-white">Fixar Balão Flutuante?</h3>
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-300 leading-relaxed mb-4">
+              Igual ao <strong>placar de jogos do Google</strong>: fixe o balão da sua senha na tela do celular para poder usar o <strong>WhatsApp</strong> ou outros apps à vontade enquanto aguarda.
+              <br /><br />
+              Você será <strong>avisado com toque sonoro e alarme</strong> no momento exato em que for chamado!
+            </p>
+
+            <div className="space-y-2">
+              <button
+                onClick={handleEnablePiP}
+                disabled={pipLoading}
+                className="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-black rounded-xl text-xs flex items-center justify-center gap-2 shadow-xl shadow-indigo-600/30 cursor-pointer transition-all"
+              >
+                <Pin className="w-4 h-4" />
+                {pipLoading ? 'Ativando Balão...' : 'Sim, Fixar Balão Flutuante & Alarme'}
+              </button>
+              <button
+                onClick={() => setShowPipPrompt(false)}
+                className="w-full py-2.5 text-slate-400 hover:text-slate-200 text-xs font-semibold text-center cursor-pointer"
+              >
+                Não, acompanhar somente nesta página
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Tenant Branding Header */}
-      <div className="p-4 bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border-b border-slate-800/80">
+      <div 
+        className="p-4 border-b border-slate-800/80 transition-all"
+        style={{
+          background: tenant.primary_color 
+            ? `linear-gradient(180deg, ${tenant.primary_color}33 0%, #020617 100%)`
+            : 'linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, #020617 100%)'
+        }}
+      >
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-teal-400">Atendimento Digital</span>
+            <span 
+              className="text-[10px] uppercase font-bold tracking-wider"
+              style={{ color: tenant.accent_color || '#2dd4bf' }}
+            >
+              Atendimento Digital
+            </span>
             <h1 className="text-base font-bold text-white leading-tight">{tenant.name}</h1>
             <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
               <MapPin className="w-3 h-3 text-slate-500" /> {tenant.address || 'Unidade Principal'}
             </p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 font-bold">
-            🏥
+          <div 
+            className="w-11 h-11 rounded-2xl flex items-center justify-center text-2xl shadow-inner border border-slate-700/60"
+            style={{ 
+              backgroundColor: tenant.primary_color ? `${tenant.primary_color}22` : 'rgba(20, 184, 166, 0.1)',
+              borderColor: tenant.accent_color ? `${tenant.accent_color}55` : 'rgba(20, 184, 166, 0.3)'
+            }}
+          >
+            {tenant.logo_icon || '🏥'}
           </div>
         </div>
 
+        {/* Custom White-label Banner Alert */}
+        {tenant.ticket_banner_message && (
+          <div className="mt-3 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300 flex items-start gap-2 shadow-sm">
+            <Info className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+            <div className="text-[11px] leading-relaxed text-slate-300">
+              {tenant.ticket_banner_message}
+            </div>
+          </div>
+        )}
+
         {/* Ticket Big Card */}
-        <div className="mt-4 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-lg relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="mt-3 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-lg relative overflow-hidden">
+          <div 
+            className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl pointer-events-none opacity-20"
+            style={{ backgroundColor: tenant.accent_color || '#14b8a6' }}
+          ></div>
           
           <div className="flex items-center justify-between mb-1">
             <span className="text-xs text-slate-400 font-medium">{service.name}</span>
@@ -232,7 +406,10 @@ export default function MobileTracker({ initialToken }) {
           <div className="flex items-baseline justify-between mt-1">
             <div>
               <span className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold block">Sua Senha</span>
-              <div className="text-4xl font-black tracking-tight text-white font-mono mt-0.5">
+              <div 
+                className="text-4xl font-black tracking-tight text-white font-mono mt-0.5"
+                style={{ textShadow: tenant.accent_color ? `0 0 20px ${tenant.accent_color}44` : undefined }}
+              >
                 {ticket.display_code}
               </div>
             </div>
@@ -585,8 +762,17 @@ export default function MobileTracker({ initialToken }) {
       </div>
 
       {/* Floating Footer info */}
-      <div className="mt-auto px-4 py-3 bg-slate-950 border-t border-slate-900 text-center text-[11px] text-slate-500">
-        Pode aguardar confortavelmente onde desejar. Seu celular vibrará e emitirá sinal sonoro quando você for chamado!
+      <div className="mt-auto px-4 py-3 bg-slate-950 border-t border-slate-900 text-center text-[11px] text-slate-400 space-y-1">
+        {tenant.ticket_footer_message ? (
+          <div className="text-xs font-medium text-slate-300">
+            {tenant.ticket_footer_message}
+          </div>
+        ) : (
+          <div>Pode aguardar confortavelmente onde desejar. Seu celular vibrará e emitirá sinal sonoro quando você for chamado!</div>
+        )}
+        <div className="text-[10px] text-slate-600">
+          Powered by NextQueue Multi-Tenant • {tenant.name}
+        </div>
       </div>
     </div>
   );

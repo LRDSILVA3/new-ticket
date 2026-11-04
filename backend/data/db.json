@@ -10,7 +10,15 @@
       "buffer_value": 10,
       "contact_phone": "(11) 3456-7890",
       "address": "Av. Paulista, 1500 - São Paulo, SP",
-      "created_at": "2026-10-31T20:01:12.049Z"
+      "created_at": "2026-10-31T20:01:12.049Z",
+      "api_key": "nq_live_clinica-sao-rafael_iwtfzt0t66318gqrtf",
+      "accent_color": "#06b6d4",
+      "ticket_theme": "dark",
+      "ticket_banner_message": "Apresente um documento com foto ao ser chamado(a).",
+      "ticket_footer_message": "Wi-Fi da Unidade: Visitantes | Dúvidas? Procure a recepção.",
+      "logo_icon": "🏥",
+      "webhook_url": "",
+      "webhook_secret": ""
     },
     {
       "id": "clinica-saude-total",
@@ -22,7 +30,35 @@
       "buffer_value": 20,
       "contact_phone": "(21) 2233-4455",
       "address": "Rua das Laranjeiras, 300 - Rio de Janeiro, RJ",
-      "created_at": "2026-10-31T20:01:12.050Z"
+      "created_at": "2026-10-31T20:01:12.050Z",
+      "api_key": "nq_live_clinica-saude-total_gp4luv38qhtdgxxdoy",
+      "accent_color": "#06b6d4",
+      "ticket_theme": "dark",
+      "ticket_banner_message": "Apresente um documento com foto ao ser chamado(a).",
+      "ticket_footer_message": "Wi-Fi da Unidade: Visitantes | Dúvidas? Procure a recepção.",
+      "logo_icon": "🏥",
+      "webhook_url": "",
+      "webhook_secret": ""
+    },
+    {
+      "id": "hospital-santa-helena",
+      "slug": "hospital-santa-helena",
+      "name": "Hospital Santa Helena",
+      "tagline": "Excelência em Cardiologia e Diagnóstico",
+      "theme_color": "#0284c7",
+      "accent_color": "#38bdf8",
+      "logo_icon": "🩺",
+      "buffer_type": "fixed_minutes",
+      "buffer_value": 10,
+      "contact_phone": "(11) 98765-4321",
+      "address": "Av. Brigadeiro Faria Lima, 2000 - SP",
+      "api_key": "nq_live_hospital-santa-helena_f21b412802cb47bf",
+      "webhook_url": "",
+      "webhook_secret": "sec_726b2f75166a43d6",
+      "ticket_theme": "dark",
+      "ticket_banner_message": "Dirija-se ao 2º andar para cadastro biométrico.",
+      "ticket_footer_message": "Rede Wi-Fi: SantaHelena_Guest | Senha: saude",
+      "created_at": "2026-11-01T04:20:34.861Z"
     }
   ],
   "services": [
@@ -64,6 +100,29 @@
         "stg-lab-recepcao",
         "stg-lab-coleta",
         "stg-lab-entrega"
+      ]
+    },
+    {
+      "id": "serv-1793506834862",
+      "tenant_id": "hospital-santa-helena",
+      "name": "Atendimento Geral",
+      "description": "Fluxo padrão de atendimento ao cliente / paciente",
+      "code_prefix": "AT",
+      "active": true,
+      "stages": [
+        "stg-1793506834862-1",
+        "stg-1793506834862-2"
+      ]
+    },
+    {
+      "id": "serv-1793506880457",
+      "tenant_id": "hospital-santa-helena",
+      "name": "Checkup Cardiológico Executivo",
+      "description": "Protocolo completo com ECG, Ecocardiograma e Avaliação Médica",
+      "code_prefix": "CARD",
+      "active": true,
+      "stages": [
+        "stg-1793506880470"
       ]
     }
   ],
@@ -179,155 +238,385 @@
       "description": "Entrega do protocolo de resultados online",
       "allow_notes": false,
       "can_skip": false
+    },
+    {
+      "id": "stg-1793506834862-1",
+      "tenant_id": "hospital-santa-helena",
+      "service_id": "serv-1793506834862",
+      "step_order": 1,
+      "name": "Acolhimento & Triagem",
+      "counter_label": "Guichê de Entrada 01",
+      "default_avg_minutes": 8,
+      "color": "#3b82f6",
+      "icon": "Activity",
+      "description": "Conferência de dados, queixa principal e triagem inicial",
+      "allow_notes": true,
+      "can_skip": false
+    },
+    {
+      "id": "stg-1793506834862-2",
+      "tenant_id": "hospital-santa-helena",
+      "service_id": "serv-1793506834862",
+      "step_order": 2,
+      "name": "Atendimento Especializado",
+      "counter_label": "Sala / Consultório 01",
+      "default_avg_minutes": 15,
+      "color": "#10b981",
+      "icon": "Stethoscope",
+      "description": "Atendimento principal pelo profissional responsável",
+      "allow_notes": true,
+      "can_skip": false
+    },
+    {
+      "id": "stg-1793506880470",
+      "tenant_id": "hospital-santa-helena",
+      "service_id": "serv-1793506880457",
+      "step_order": 1,
+      "name": "Eletrocardiograma (ECG)",
+      "counter_label": "Sala 102 - Exames Cardíacos",
+      "default_avg_minutes": 12,
+      "color": "#0284c7",
+      "icon": "Activity",
+      "description": "",
+      "allow_notes": true,
+      "can_skip": false
     }
   ],
   "tickets": [
     {
-      "id": "tkt-951634df",
+      "id": "tkt-c370d0e9",
       "tenant_id": "clinica-sao-rafael",
       "service_id": "serv-pa",
-      "tracking_token": "tk_817f5671",
-      "tracking_url": "http://localhost:5173/track/tk_817f5671",
+      "tracking_token": "tk_f86433da",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_f86433da",
       "display_code": "PA-001",
-      "customer_name": "Jo�o da Silva",
+      "customer_name": "Teste Remoto Cloudflare",
       "customer_phone": "",
-      "priority": "preferencial",
+      "priority": "normal",
       "current_stage_id": "stg-alta",
       "current_stage_order": 4,
       "status": "completed",
-      "assigned_counter": null,
-      "assigned_operator": null,
-      "call_count": 0,
-      "called_at": null,
+      "assigned_counter": "Recepção de Alta / Farmácia",
+      "assigned_operator": "Enfª. Mariana Souza",
+      "call_count": 2,
+      "called_at": "2026-11-01T02:32:30.919Z",
       "current_stage_started_at": null,
-      "created_at": "2026-10-31T20:06:28.805Z",
-      "updated_at": "2026-10-31T20:07:23.037Z",
-      "completed_at": "2026-10-31T20:07:23.037Z",
-      "clinical_notes": [
-        {
-          "stage_id": "stg-triagem",
-          "stage_name": "Triagem & Classificação de Risco",
-          "operator": "Enf� Mariana Souza",
-          "counter": "Sala de Triagem 01",
-          "notes": "PA: 130x85 mmHg, FC: 76 bpm, Temp: 36.4C. Queixa de tosse e dor no peito leve. Classifica��o Manchester: Amarelo.",
-          "timestamp": "2026-10-31T20:06:44.885Z"
-        },
-        {
-          "stage_id": "stg-consulta",
-          "stage_name": "Consulta Médica",
-          "operator": "Dr. Roberto Santos",
-          "counter": "Consult�rio M�dico 03",
-          "notes": "Receitado antibi�tico e repouso de 3 dias. Encaminhado direto para alta m�dica.",
-          "timestamp": "2026-10-31T20:07:16.156Z"
-        },
-        {
-          "stage_id": "stg-alta",
-          "stage_name": "Conclusão & Alta Médica",
-          "operator": "Profissional",
-          "counter": "Sala",
-          "notes": "Receitas e atestados entregues, paciente liberado.",
-          "timestamp": "2026-10-31T20:07:23.036Z"
-        }
-      ]
+      "created_at": "2026-11-01T01:56:58.725Z",
+      "updated_at": "2026-11-01T02:32:32.215Z",
+      "completed_at": "2026-11-01T02:32:32.215Z",
+      "clinical_notes": []
     },
     {
-      "id": "tkt-77946601",
+      "id": "tkt-ac89032d",
       "tenant_id": "clinica-sao-rafael",
       "service_id": "serv-pa",
-      "tracking_token": "tk_a388a9da",
-      "tracking_url": "http://192.168.1.12:5000/track/tk_a388a9da",
+      "tracking_token": "tk_2cf4bd56",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_2cf4bd56",
       "display_code": "PA-002",
-      "customer_name": "Teste QR Celular",
+      "customer_name": "Lucas",
       "customer_phone": "",
       "priority": "normal",
-      "current_stage_id": "stg-triagem",
-      "current_stage_order": 1,
+      "current_stage_id": "stg-alta",
+      "current_stage_order": 4,
+      "status": "completed",
+      "assigned_counter": "Recepção de Alta / Farmácia",
+      "assigned_operator": "Enfª. Mariana Souza",
+      "call_count": 1,
+      "called_at": "2026-11-01T02:32:33.884Z",
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T01:59:02.816Z",
+      "updated_at": "2026-11-01T02:32:35.752Z",
+      "completed_at": "2026-11-01T02:32:35.752Z",
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_c22ed1ed",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_c22ed1ed",
+      "display_code": "PA-003",
+      "customer_name": "Lucas",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-alta",
+      "current_stage_order": 4,
+      "status": "completed",
+      "assigned_counter": "Recepção de Alta / Farmácia",
+      "assigned_operator": "Enfª. Mariana Souza",
+      "call_count": 1,
+      "called_at": "2026-11-01T02:32:36.958Z",
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T02:27:44.992Z",
+      "updated_at": "2026-11-01T02:32:38.643Z",
+      "completed_at": "2026-11-01T02:32:38.643Z",
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_55bcd06d",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_55bcd06d",
+      "display_code": "PA-004",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-alta",
+      "current_stage_order": 4,
+      "status": "called",
+      "assigned_counter": "Recepção de Alta / Farmácia",
+      "assigned_operator": "Enfª. Mariana Souza",
+      "call_count": 1,
+      "called_at": "2026-11-01T02:32:39.978Z",
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T02:28:53.900Z",
+      "updated_at": "2026-11-01T02:32:39.978Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-ac187789",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_cbcb126a",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_cbcb126a",
+      "display_code": "PA-005",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
       "status": "waiting",
       "assigned_counter": null,
       "assigned_operator": null,
       "call_count": 0,
       "called_at": null,
       "current_stage_started_at": null,
-      "created_at": "2026-10-31T20:09:01.801Z",
-      "updated_at": "2026-10-31T20:09:01.801Z",
+      "created_at": "2026-11-01T03:16:52.610Z",
+      "updated_at": "2026-11-01T04:04:20.721Z",
       "completed_at": null,
       "clinical_notes": []
     },
     {
-      "id": "tkt-be04b569",
+      "id": "tkt-dbae5688",
       "tenant_id": "clinica-sao-rafael",
       "service_id": "serv-pa",
-      "tracking_token": "tk_e664ca16",
-      "tracking_url": "http://192.168.1.12:5000/track/tk_e664ca16",
+      "tracking_token": "tk_275217b1",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_275217b1",
+      "display_code": "PA-006",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T04:03:25.037Z",
+      "updated_at": "2026-11-03T12:00:10.058Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-5ba4b897",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_006cfa51",
+      "tracking_url": "http://192.168.1.11:5000/track/tk_006cfa51",
+      "display_code": "PA-007",
+      "customer_name": "Teste Kiosk Elgin Integrado",
+      "customer_phone": "",
+      "customer_document": "",
+      "priority": "preferencial",
+      "external_reference_id": null,
+      "metadata": null,
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T04:19:52.933Z",
+      "updated_at": "2026-11-03T12:00:12.805Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-859f7f87",
+      "tenant_id": "hospital-santa-helena",
+      "service_id": "serv-1793506880457",
+      "tracking_token": "tk_70316aee",
+      "tracking_url": "http://192.168.1.11:5000/track/tk_70316aee",
+      "display_code": "CARD-001",
+      "customer_name": "Carlos Drummond",
+      "customer_phone": "",
+      "customer_document": "",
+      "priority": "preferencial",
+      "external_reference_id": null,
+      "metadata": null,
+      "current_stage_id": "stg-1793506880470",
+      "current_stage_order": 1,
+      "status": "called",
+      "assigned_counter": "Consultório 12 - Cardiologia",
+      "assigned_operator": "Dra. Mariana Costa",
+      "call_count": 1,
+      "called_at": "2026-11-01T04:21:20.549Z",
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T04:21:20.539Z",
+      "updated_at": "2026-11-01T04:21:20.549Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-40e3ba22",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_84c034ca",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_84c034ca",
+      "display_code": "PA-008",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T11:30:27.347Z",
+      "updated_at": "2026-11-03T12:00:14.710Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_0bd05c7a",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_0bd05c7a",
+      "display_code": "PA-009",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T11:31:41.048Z",
+      "updated_at": "2026-11-03T12:00:16.305Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-c07aafc5",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_b5039f81",
+      "tracking_url": "https://read-ride-painting-transmit.trycloudflare.com/track/tk_b5039f81",
+      "display_code": "PA-010",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-01T12:02:19.426Z",
+      "updated_at": "2026-11-03T12:00:18.577Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-a9d66bc1",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_a6862bef",
+      "tracking_url": "https://intellectual-vcr-themes-participants.trycloudflare.com/track/tk_a6862bef",
       "display_code": "PA-001",
       "customer_name": "Paciente / Visitante",
       "customer_phone": "",
       "priority": "normal",
-      "current_stage_id": "stg-triagem",
-      "current_stage_order": 1,
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
       "status": "waiting",
       "assigned_counter": null,
       "assigned_operator": null,
       "call_count": 0,
       "called_at": null,
       "current_stage_started_at": null,
-      "created_at": "2026-11-01T22:17:52.772Z",
-      "updated_at": "2026-11-01T22:17:52.772Z",
+      "created_at": "2026-11-03T11:57:24.970Z",
+      "updated_at": "2026-11-03T12:00:20.274Z",
       "completed_at": null,
       "clinical_notes": []
     },
     {
-      "id": "tkt-0db722ec",
+      "id": "tkt-e5167556",
       "tenant_id": "clinica-sao-rafael",
       "service_id": "serv-pa",
-      "tracking_token": "tk_80d033b3",
-      "tracking_url": "http://192.168.1.12:5000/track/tk_80d033b3",
+      "tracking_token": "tk_88cf2ed2",
+      "tracking_url": "https://intellectual-vcr-themes-participants.trycloudflare.com/track/tk_88cf2ed2",
       "display_code": "PA-002",
+      "customer_name": "Paciente / Visitante",
+      "customer_phone": "",
+      "priority": "normal",
+      "current_stage_id": "stg-consulta",
+      "current_stage_order": 2,
+      "status": "waiting",
+      "assigned_counter": null,
+      "assigned_operator": null,
+      "call_count": 0,
+      "called_at": null,
+      "current_stage_started_at": null,
+      "created_at": "2026-11-03T11:57:54.354Z",
+      "updated_at": "2026-11-03T12:00:29.835Z",
+      "completed_at": null,
+      "clinical_notes": []
+    },
+    {
+      "id": "tkt-225659fa",
+      "tenant_id": "clinica-sao-rafael",
+      "service_id": "serv-pa",
+      "tracking_token": "tk_97521ba6",
+      "tracking_url": "https://intellectual-vcr-themes-participants.trycloudflare.com/track/tk_97521ba6",
+      "display_code": "PA-003",
       "customer_name": "Paciente / Visitante",
       "customer_phone": "",
       "priority": "normal",
       "current_stage_id": "stg-triagem",
       "current_stage_order": 1,
-      "status": "waiting",
-      "assigned_counter": null,
-      "assigned_operator": null,
-      "call_count": 0,
-      "called_at": null,
+      "status": "called",
+      "assigned_counter": "Sala de Triagem / Enfermagem",
+      "assigned_operator": "Enfª. Mariana Souza",
+      "call_count": 1,
+      "called_at": "2026-11-03T12:00:30.764Z",
       "current_stage_started_at": null,
-      "created_at": "2026-11-01T22:18:33.282Z",
-      "updated_at": "2026-11-01T22:18:33.282Z",
-      "completed_at": null,
-      "clinical_notes": []
-    },
-    {
-      "id": "tkt-0679b1c5",
-      "tenant_id": "clinica-sao-rafael",
-      "service_id": "serv-pa",
-      "tracking_token": "tk_2470a05c",
-      "tracking_url": "https://coated-professional-officer-java.trycloudflare.com/track/tk_2470a05c",
-      "display_code": "PA-003",
-      "customer_name": "Teste Cloudflare Publico",
-      "customer_phone": "",
-      "priority": "normal",
-      "current_stage_id": "stg-triagem",
-      "current_stage_order": 1,
-      "status": "waiting",
-      "assigned_counter": null,
-      "assigned_operator": null,
-      "call_count": 0,
-      "called_at": null,
-      "current_stage_started_at": null,
-      "created_at": "2026-11-01T22:22:05.133Z",
-      "updated_at": "2026-11-01T22:22:05.133Z",
+      "created_at": "2026-11-03T11:58:26.020Z",
+      "updated_at": "2026-11-03T12:00:30.764Z",
       "completed_at": null,
       "clinical_notes": []
     }
   ],
   "ticket_events": [
     {
-      "id": "evt-1793477188805-ewocq0",
-      "timestamp": "2026-10-31T20:06:28.805Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793498218726-7q8t6p",
+      "timestamp": "2026-11-01T01:56:58.726Z",
+      "ticket_id": "tkt-c370d0e9",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "TICKET_CREATED",
@@ -335,43 +624,110 @@
         "display_code": "PA-001",
         "service_name": "Pronto Atendimento (PA)",
         "initial_stage_name": "Triagem & Classificação de Risco",
-        "priority": "preferencial",
+        "priority": "normal",
         "message": "Ticket PA-001 emitido com sucesso para Triagem & Classificação de Risco"
       }
     },
     {
-      "id": "evt-1793477196880-ptz06h",
-      "timestamp": "2026-10-31T20:06:36.880Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793498342818-684qcy",
+      "timestamp": "2026-11-01T01:59:02.818Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-002",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-002 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793498373032-3g8dso",
+      "timestamp": "2026-11-01T01:59:33.032Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "uZ6-mExADwCqSxQbAAAA",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793498561369-9y4xse",
+      "timestamp": "2026-11-01T02:02:41.369Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "jx_flPoRXVnckS0OAAAD",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793498583001-pmijp4",
+      "timestamp": "2026-11-01T02:03:03.001Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "flN1prKfYTzVlQPiAAAE",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793498849682-hhmplw",
+      "timestamp": "2026-11-01T02:07:29.682Z",
+      "ticket_id": "tkt-ac89032d",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "TICKET_CALLED",
       "payload": {
-        "counter": "Sala de Triagem 01",
-        "operator": "Enf� Mariana Souza",
+        "counter": "Sala 01 - Triagem",
+        "operator": "Dra. Mariana",
         "stage_name": "Triagem & Classificação de Risco",
         "call_count": 1,
-        "message": "PA-001 chamado para Sala de Triagem 01 (Enf� Mariana Souza)"
+        "message": "PA-002 chamado para Sala 01 - Triagem (Dra. Mariana)"
       }
     },
     {
-      "id": "evt-1793477204885-fz4im0",
-      "timestamp": "2026-10-31T20:06:44.885Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793499008622-kl7wj4",
+      "timestamp": "2026-11-01T02:10:08.622Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "a6OvYskAm-gDHYoGAAAC",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793499045854-0isisi",
+      "timestamp": "2026-11-01T02:10:45.854Z",
+      "ticket_id": "tkt-ac89032d",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "STAGE_COMPLETED",
       "payload": {
         "stage_name": "Triagem & Classificação de Risco",
-        "durationMinutes": 1,
-        "notes": "PA: 130x85 mmHg, FC: 76 bpm, Temp: 36.4C. Queixa de tosse e dor no peito leve. Classifica��o Manchester: Amarelo.",
-        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+        "durationMinutes": 3,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (3 min)"
       }
     },
     {
-      "id": "evt-1793477204886-irr6f7",
-      "timestamp": "2026-10-31T20:06:44.886Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793499045858-szx2eo",
+      "timestamp": "2026-11-01T02:10:45.858Z",
+      "ticket_id": "tkt-ac89032d",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-consulta",
       "event_type": "STAGE_TRANSFERRED",
@@ -382,65 +738,811 @@
       }
     },
     {
-      "id": "evt-1793477228211-hybqv1",
-      "timestamp": "2026-10-31T20:07:08.211Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793499062675-pmifrb",
+      "timestamp": "2026-11-01T02:11:02.676Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-001 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793499244942-rqolfl",
+      "timestamp": "2026-11-01T02:14:04.942Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "wVQj3L41mZytIN7GAAAD",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793499290260-1jpf0q",
+      "timestamp": "2026-11-01T02:14:50.260Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "8xMmHivVLCIJYyIYAAAE",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793499385460-6bua70",
+      "timestamp": "2026-11-01T02:16:25.460Z",
+      "ticket_id": "tkt-ac89032d",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-consulta",
       "event_type": "TICKET_CALLED",
       "payload": {
-        "counter": "Consult�rio M�dico 03",
-        "operator": "Dr. Roberto Santos",
+        "counter": "Consultorio 02",
+        "operator": "Dr. Roberto",
         "stage_name": "Consulta Médica",
         "call_count": 1,
-        "message": "PA-001 chamado para Consult�rio M�dico 03 (Dr. Roberto Santos)"
+        "message": "PA-002 chamado para Consultorio 02 (Dr. Roberto)"
       }
     },
     {
-      "id": "evt-1793477236156-m9453a",
-      "timestamp": "2026-10-31T20:07:16.156Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793499411266-x5k95y",
+      "timestamp": "2026-11-01T02:16:51.266Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "XnxTKMsOukf3SG7XAAAC",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793499428594-o7x2si",
+      "timestamp": "2026-11-01T02:17:08.594Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "Thao0gSz-E7nYQ1fAAAD",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793499452916-fscc7f",
+      "timestamp": "2026-11-01T02:17:32.916Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "AxUBoRPOtKHpK-oXAAAF",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793499479560-49i4xk",
+      "timestamp": "2026-11-01T02:17:59.560Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "ZBajzqbJmOquB6bDAAAG",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500064993-y3eg1s",
+      "timestamp": "2026-11-01T02:27:44.993Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-003",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-003 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793500074579-e4r0d0",
+      "timestamp": "2026-11-01T02:27:54.579Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "8tmXBWMYCbYmFvPlAAAH",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500074938-6fqjhe",
+      "timestamp": "2026-11-01T02:27:54.938Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "Ye-3DD44ttZltK3fAAAI",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500087591-k028ov",
+      "timestamp": "2026-11-01T02:28:07.591Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALL_REPEAT",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "call_count": 2,
+        "message": "Chamada repetida (2ª vez) para Sala de Triagem / Enfermagem"
+      }
+    },
+    {
+      "id": "evt-1793500096130-ua4oyr",
+      "timestamp": "2026-11-01T02:28:16.130Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500096146-ld3dkf",
+      "timestamp": "2026-11-01T02:28:16.146Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793500100324-m05ehb",
+      "timestamp": "2026-11-01T02:28:20.324Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-003 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500105296-0hso0p",
+      "timestamp": "2026-11-01T02:28:25.296Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "cBSlhjb-_LmDZB_KAAAJ",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500108814-9mokxe",
+      "timestamp": "2026-11-01T02:28:28.814Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "zT2VUO-3l_s1xeKhAAAK",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500113446-fhhxjk",
+      "timestamp": "2026-11-01T02:28:33.446Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "__ygZtLyyLhLRfseAAAL",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500133901-7g546a",
+      "timestamp": "2026-11-01T02:28:53.901Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-004",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-004 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793500145000-ftio44",
+      "timestamp": "2026-11-01T02:29:05.000Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "XCt1o23CdCfKQ3NpAAAM",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500145959-9ikqk4",
+      "timestamp": "2026-11-01T02:29:05.960Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "SBQXQ3se_kjjii-dAAAN",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793500178104-sosmv6",
+      "timestamp": "2026-11-01T02:29:38.104Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALL_REPEAT",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "call_count": 2,
+        "message": "Chamada repetida (2ª vez) para Sala de Triagem / Enfermagem"
+      }
+    },
+    {
+      "id": "evt-1793500183094-rhmc7s",
+      "timestamp": "2026-11-01T02:29:43.094Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500183097-u1s91o",
+      "timestamp": "2026-11-01T02:29:43.097Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793500186538-z1rnjs",
+      "timestamp": "2026-11-01T02:29:46.538Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-004 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500200229-l9e04y",
+      "timestamp": "2026-11-01T02:30:00.229Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_STARTED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "message": "Atendimento iniciado na etapa Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793500215979-h2j1w5",
+      "timestamp": "2026-11-01T02:30:15.979Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500215982-7k8bwe",
+      "timestamp": "2026-11-01T02:30:15.982Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793500230091-xegp01",
+      "timestamp": "2026-11-01T02:30:30.091Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALL_REPEAT",
+      "payload": {
+        "counter": "Consultorio 02",
+        "operator": "Dr. Roberto",
+        "call_count": 2,
+        "message": "Chamada repetida (2ª vez) para Consultorio 02"
+      }
+    },
+    {
+      "id": "evt-1793500231703-tf2vhs",
+      "timestamp": "2026-11-01T02:30:31.703Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALL_REPEAT",
+      "payload": {
+        "counter": "Consultorio 02",
+        "operator": "Dr. Roberto",
+        "call_count": 3,
+        "message": "Chamada repetida (3ª vez) para Consultorio 02"
+      }
+    },
+    {
+      "id": "evt-1793500232218-geusiy",
+      "timestamp": "2026-11-01T02:30:32.218Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALL_REPEAT",
+      "payload": {
+        "counter": "Consultorio 02",
+        "operator": "Dr. Roberto",
+        "call_count": 4,
+        "message": "Chamada repetida (4ª vez) para Consultorio 02"
+      }
+    },
+    {
+      "id": "evt-1793500234436-it4e6z",
+      "timestamp": "2026-11-01T02:30:34.436Z",
+      "ticket_id": "tkt-ac89032d",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-consulta",
       "event_type": "STAGE_COMPLETED",
       "payload": {
         "stage_name": "Consulta Médica",
         "durationMinutes": 1,
-        "notes": "Receitado antibi�tico e repouso de 3 dias. Encaminhado direto para alta m�dica.",
+        "notes": "",
         "message": "Etapa Consulta Médica concluída (1 min)"
       }
     },
     {
-      "id": "evt-1793477236157-6jpppm",
-      "timestamp": "2026-10-31T20:07:16.157Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793500234438-4alcrd",
+      "timestamp": "2026-11-01T02:30:34.438Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Consulta Médica",
+        "next_stage": "Exames Rápidos / Medicação",
+        "message": "Encaminhado para a fila de Exames Rápidos / Medicação"
+      }
+    },
+    {
+      "id": "evt-1793500236841-zxjy3q",
+      "timestamp": "2026-11-01T02:30:36.841Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Consultório Médico",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Consulta Médica",
+        "call_count": 1,
+        "message": "PA-001 chamado para Consultório Médico (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500241351-fqsq0l",
+      "timestamp": "2026-11-01T02:30:41.351Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Consulta Médica",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Consulta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500241354-u72a8v",
+      "timestamp": "2026-11-01T02:30:41.354Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Consulta Médica",
+        "next_stage": "Exames Rápidos / Medicação",
+        "message": "Encaminhado para a fila de Exames Rápidos / Medicação"
+      }
+    },
+    {
+      "id": "evt-1793500244782-v06qub",
+      "timestamp": "2026-11-01T02:30:44.782Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Consultório Médico",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Consulta Médica",
+        "call_count": 1,
+        "message": "PA-003 chamado para Consultório Médico (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500249191-u8p4cq",
+      "timestamp": "2026-11-01T02:30:49.191Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Consulta Médica",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Consulta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500249196-qqgbsc",
+      "timestamp": "2026-11-01T02:30:49.196Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Consulta Médica",
+        "next_stage": "Exames Rápidos / Medicação",
+        "message": "Encaminhado para a fila de Exames Rápidos / Medicação"
+      }
+    },
+    {
+      "id": "evt-1793500250808-10jdw8",
+      "timestamp": "2026-11-01T02:30:50.808Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Consultório Médico",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Consulta Médica",
+        "call_count": 1,
+        "message": "PA-004 chamado para Consultório Médico (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500265699-8er3fz",
+      "timestamp": "2026-11-01T02:31:05.699Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Consulta Médica",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Consulta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500265702-y7gsfj",
+      "timestamp": "2026-11-01T02:31:05.702Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Consulta Médica",
+        "next_stage": "Exames Rápidos / Medicação",
+        "message": "Encaminhado para a fila de Exames Rápidos / Medicação"
+      }
+    },
+    {
+      "id": "evt-1793500275171-2dt2lh",
+      "timestamp": "2026-11-01T02:31:15.171Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Procedimentos & Medicação",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Exames Rápidos / Medicação",
+        "call_count": 1,
+        "message": "PA-001 chamado para Sala de Procedimentos & Medicação (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500277831-cm55s2",
+      "timestamp": "2026-11-01T02:31:17.831Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Exames Rápidos / Medicação",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Exames Rápidos / Medicação concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500277854-m1f94x",
+      "timestamp": "2026-11-01T02:31:17.854Z",
+      "ticket_id": "tkt-c370d0e9",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-alta",
       "event_type": "STAGE_TRANSFERRED",
       "payload": {
-        "previous_stage": "Consulta Médica",
+        "previous_stage": "Exames Rápidos / Medicação",
         "next_stage": "Conclusão & Alta Médica",
         "message": "Encaminhado para a fila de Conclusão & Alta Médica"
       }
     },
     {
-      "id": "evt-1793477243036-tw80f8",
-      "timestamp": "2026-10-31T20:07:23.036Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793500279116-v8jgld",
+      "timestamp": "2026-11-01T02:31:19.116Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Procedimentos & Medicação",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Exames Rápidos / Medicação",
+        "call_count": 1,
+        "message": "PA-002 chamado para Sala de Procedimentos & Medicação (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500281276-q9sia9",
+      "timestamp": "2026-11-01T02:31:21.276Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Exames Rápidos / Medicação",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Exames Rápidos / Medicação concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500281280-dqpxjt",
+      "timestamp": "2026-11-01T02:31:21.280Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Exames Rápidos / Medicação",
+        "next_stage": "Conclusão & Alta Médica",
+        "message": "Encaminhado para a fila de Conclusão & Alta Médica"
+      }
+    },
+    {
+      "id": "evt-1793500282556-uip2eb",
+      "timestamp": "2026-11-01T02:31:22.557Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Procedimentos & Medicação",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Exames Rápidos / Medicação",
+        "call_count": 1,
+        "message": "PA-003 chamado para Sala de Procedimentos & Medicação (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500285396-s9k4hd",
+      "timestamp": "2026-11-01T02:31:25.396Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Exames Rápidos / Medicação",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Exames Rápidos / Medicação concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500285399-46mszt",
+      "timestamp": "2026-11-01T02:31:25.399Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Exames Rápidos / Medicação",
+        "next_stage": "Conclusão & Alta Médica",
+        "message": "Encaminhado para a fila de Conclusão & Alta Médica"
+      }
+    },
+    {
+      "id": "evt-1793500287083-5d1gyo",
+      "timestamp": "2026-11-01T02:31:27.083Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Procedimentos & Medicação",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Exames Rápidos / Medicação",
+        "call_count": 1,
+        "message": "PA-004 chamado para Sala de Procedimentos & Medicação (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500328178-o8m2n3",
+      "timestamp": "2026-11-01T02:32:08.178Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_STARTED",
+      "payload": {
+        "counter": "Sala de Procedimentos & Medicação",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Exames Rápidos / Medicação",
+        "message": "Atendimento iniciado na etapa Exames Rápidos / Medicação"
+      }
+    },
+    {
+      "id": "evt-1793500337599-yn7c64",
+      "timestamp": "2026-11-01T02:32:17.599Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-exames",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Exames Rápidos / Medicação",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Exames Rápidos / Medicação concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500337616-yi9le5",
+      "timestamp": "2026-11-01T02:32:17.616Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Exames Rápidos / Medicação",
+        "next_stage": "Conclusão & Alta Médica",
+        "message": "Encaminhado para a fila de Conclusão & Alta Médica"
+      }
+    },
+    {
+      "id": "evt-1793500347422-68f2h4",
+      "timestamp": "2026-11-01T02:32:27.422Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Recepção de Alta / Farmácia",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Conclusão & Alta Médica",
+        "call_count": 1,
+        "message": "PA-001 chamado para Recepção de Alta / Farmácia (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500350920-xo12wf",
+      "timestamp": "2026-11-01T02:32:30.920Z",
+      "ticket_id": "tkt-c370d0e9",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_CALL_REPEAT",
+      "payload": {
+        "counter": "Recepção de Alta / Farmácia",
+        "operator": "Enfª. Mariana Souza",
+        "call_count": 2,
+        "message": "Chamada repetida (2ª vez) para Recepção de Alta / Farmácia"
+      }
+    },
+    {
+      "id": "evt-1793500352213-7mjj3j",
+      "timestamp": "2026-11-01T02:32:32.213Z",
+      "ticket_id": "tkt-c370d0e9",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-alta",
       "event_type": "STAGE_COMPLETED",
       "payload": {
         "stage_name": "Conclusão & Alta Médica",
         "durationMinutes": 1,
-        "notes": "Receitas e atestados entregues, paciente liberado.",
+        "notes": "",
         "message": "Etapa Conclusão & Alta Médica concluída (1 min)"
       }
     },
     {
-      "id": "evt-1793477243037-i548kr",
-      "timestamp": "2026-10-31T20:07:23.037Z",
-      "ticket_id": "tkt-951634df",
+      "id": "evt-1793500352230-csm573",
+      "timestamp": "2026-11-01T02:32:32.230Z",
+      "ticket_id": "tkt-c370d0e9",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-alta",
       "event_type": "TICKET_COMPLETED",
@@ -450,24 +1552,397 @@
       }
     },
     {
-      "id": "evt-1793477341802-vnlbju",
-      "timestamp": "2026-10-31T20:09:01.802Z",
-      "ticket_id": "tkt-77946601",
+      "id": "evt-1793500353884-guiedi",
+      "timestamp": "2026-11-01T02:32:33.885Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Recepção de Alta / Farmácia",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Conclusão & Alta Médica",
+        "call_count": 1,
+        "message": "PA-002 chamado para Recepção de Alta / Farmácia (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500355751-v4f5xt",
+      "timestamp": "2026-11-01T02:32:35.751Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Conclusão & Alta Médica",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Conclusão & Alta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500355753-vnt4r0",
+      "timestamp": "2026-11-01T02:32:35.753Z",
+      "ticket_id": "tkt-ac89032d",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_COMPLETED",
+      "payload": {
+        "totalStages": 4,
+        "message": "Atendimento integralmente concluído com sucesso!"
+      }
+    },
+    {
+      "id": "evt-1793500356959-6krd3d",
+      "timestamp": "2026-11-01T02:32:36.959Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Recepção de Alta / Farmácia",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Conclusão & Alta Médica",
+        "call_count": 1,
+        "message": "PA-003 chamado para Recepção de Alta / Farmácia (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500358642-kv2vy3",
+      "timestamp": "2026-11-01T02:32:38.642Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Conclusão & Alta Médica",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Conclusão & Alta Médica concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793500358644-ouvmvl",
+      "timestamp": "2026-11-01T02:32:38.644Z",
+      "ticket_id": "tkt-11bf4b49",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_COMPLETED",
+      "payload": {
+        "totalStages": 4,
+        "message": "Atendimento integralmente concluído com sucesso!"
+      }
+    },
+    {
+      "id": "evt-1793500359980-h0zfhm",
+      "timestamp": "2026-11-01T02:32:39.980Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Recepção de Alta / Farmácia",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Conclusão & Alta Médica",
+        "call_count": 1,
+        "message": "PA-004 chamado para Recepção de Alta / Farmácia (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793500633574-5pvxiy",
+      "timestamp": "2026-11-01T02:37:13.574Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "6wml78KFuagFMwVUAAAO",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793503012616-duw4ny",
+      "timestamp": "2026-11-01T03:16:52.616Z",
+      "ticket_id": "tkt-ac187789",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "TICKET_CREATED",
       "payload": {
-        "display_code": "PA-002",
+        "display_code": "PA-005",
         "service_name": "Pronto Atendimento (PA)",
         "initial_stage_name": "Triagem & Classificação de Risco",
         "priority": "normal",
-        "message": "Ticket PA-002 emitido com sucesso para Triagem & Classificação de Risco"
+        "message": "Ticket PA-005 emitido com sucesso para Triagem & Classificação de Risco"
       }
     },
     {
-      "id": "evt-1793571472774-yrvnzw",
-      "timestamp": "2026-11-01T22:17:52.774Z",
-      "ticket_id": "tkt-be04b569",
+      "id": "evt-1793503019574-rnnoan",
+      "timestamp": "2026-11-01T03:16:59.574Z",
+      "ticket_id": "tkt-4698b758",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-alta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "gU-6Di11ULb97BfXAAAB",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793503019718-v01x28",
+      "timestamp": "2026-11-01T03:16:59.718Z",
+      "ticket_id": "tkt-ac187789",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "bpd-N_08Z9p_6nyZAAAC",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793505805040-zwocos",
+      "timestamp": "2026-11-01T04:03:25.040Z",
+      "ticket_id": "tkt-dbae5688",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-006",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-006 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793505828932-ix8pta",
+      "timestamp": "2026-11-01T04:03:48.932Z",
+      "ticket_id": "tkt-dbae5688",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "GfTvKZls3XD-cotoAAAB",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793505855968-vyw3et",
+      "timestamp": "2026-11-01T04:04:15.968Z",
+      "ticket_id": "tkt-ac187789",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-005 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793505860715-zp84da",
+      "timestamp": "2026-11-01T04:04:20.715Z",
+      "ticket_id": "tkt-ac187789",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793505860752-r8gp59",
+      "timestamp": "2026-11-01T04:04:20.752Z",
+      "ticket_id": "tkt-ac187789",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793505862640-3h359t",
+      "timestamp": "2026-11-01T04:04:22.640Z",
+      "ticket_id": "tkt-dbae5688",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-006 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793506792935-sm53c8",
+      "timestamp": "2026-11-01T04:19:52.935Z",
+      "ticket_id": "tkt-5ba4b897",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-007",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "source": "integration_api"
+      }
+    },
+    {
+      "id": "evt-1793506880541-47ilen",
+      "timestamp": "2026-11-01T04:21:20.541Z",
+      "ticket_id": "tkt-859f7f87",
+      "tenant_id": "hospital-santa-helena",
+      "stage_id": "stg-1793506880470",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "CARD-001",
+        "service_name": "Checkup Cardiológico Executivo",
+        "initial_stage_name": "Eletrocardiograma (ECG)",
+        "source": "integration_api"
+      }
+    },
+    {
+      "id": "evt-1793506880563-utmd6b",
+      "timestamp": "2026-11-01T04:21:20.563Z",
+      "ticket_id": "tkt-859f7f87",
+      "tenant_id": "hospital-santa-helena",
+      "stage_id": "stg-1793506880470",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Consultório 12 - Cardiologia",
+        "operator": "Dra. Mariana Costa",
+        "stage_name": "Eletrocardiograma (ECG)",
+        "call_count": 1,
+        "source": "integration_api"
+      }
+    },
+    {
+      "id": "evt-1793506938480-muwxxz",
+      "timestamp": "2026-11-01T04:22:18.480Z",
+      "tenant_id": "hospital-santa-helena",
+      "event_type": "WEBHOOK_DISPATCHED",
+      "payload": {
+        "event": "system.ping",
+        "status": 200,
+        "success": true,
+        "url": "https://httpbin.org/post"
+      }
+    },
+    {
+      "id": "evt-1793532627350-zs3gcg",
+      "timestamp": "2026-11-01T11:30:27.350Z",
+      "ticket_id": "tkt-40e3ba22",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-008",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-008 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793532701050-ejdla5",
+      "timestamp": "2026-11-01T11:31:41.050Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-009",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-009 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793532719660-34la37",
+      "timestamp": "2026-11-01T11:31:59.660Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "LIWFslR6eDXlqpsGAAAE",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793534539430-q9if1g",
+      "timestamp": "2026-11-01T12:02:19.430Z",
+      "ticket_id": "tkt-c07aafc5",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CREATED",
+      "payload": {
+        "display_code": "PA-010",
+        "service_name": "Pronto Atendimento (PA)",
+        "initial_stage_name": "Triagem & Classificação de Risco",
+        "priority": "normal",
+        "message": "Ticket PA-010 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793536231990-kbrzpg",
+      "timestamp": "2026-11-01T12:30:31.990Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "myNagHktOoo-5EhSAAAG",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793536233403-kc90hw",
+      "timestamp": "2026-11-01T12:30:33.403Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "sB-9AHgvFSgn6Y4nAAAH",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793536771028-gf47qs",
+      "timestamp": "2026-11-01T12:39:31.028Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "JfEFS_auhjygaxH_AAAI",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707044974-3h3igk",
+      "timestamp": "2026-11-03T11:57:24.974Z",
+      "ticket_id": "tkt-a9d66bc1",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "TICKET_CREATED",
@@ -480,9 +1955,9 @@
       }
     },
     {
-      "id": "evt-1793571513282-5lpxb7",
-      "timestamp": "2026-11-01T22:18:33.282Z",
-      "ticket_id": "tkt-0db722ec",
+      "id": "evt-1793707074356-tfovou",
+      "timestamp": "2026-11-03T11:57:54.356Z",
+      "ticket_id": "tkt-e5167556",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "TICKET_CREATED",
@@ -495,9 +1970,22 @@
       }
     },
     {
-      "id": "evt-1793571725135-kw2j89",
-      "timestamp": "2026-11-01T22:22:05.135Z",
-      "ticket_id": "tkt-0679b1c5",
+      "id": "evt-1793707099909-n5f2x1",
+      "timestamp": "2026-11-03T11:58:19.909Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "70nT1G3QbQK3_9bVAAAA",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707106021-a34zul",
+      "timestamp": "2026-11-03T11:58:26.021Z",
+      "ticket_id": "tkt-225659fa",
       "tenant_id": "clinica-sao-rafael",
       "stage_id": "stg-triagem",
       "event_type": "TICKET_CREATED",
@@ -507,6 +1995,430 @@
         "initial_stage_name": "Triagem & Classificação de Risco",
         "priority": "normal",
         "message": "Ticket PA-003 emitido com sucesso para Triagem & Classificação de Risco"
+      }
+    },
+    {
+      "id": "evt-1793707116926-nmhv8y",
+      "timestamp": "2026-11-03T11:58:36.926Z",
+      "ticket_id": "tkt-225659fa",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+        "socketId": "hGoF8eM3nioMKENkAAAB",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707188560-5vqb90",
+      "timestamp": "2026-11-03T11:59:48.560Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "wisyo37Bi3vBqRVFAAAC",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707189504-qkdjlo",
+      "timestamp": "2026-11-03T11:59:49.504Z",
+      "ticket_id": "tkt-225659fa",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+        "socketId": "fnDymB6Onc2sPQ89AAAD",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707191537-8so0m5",
+      "timestamp": "2026-11-03T11:59:51.537Z",
+      "ticket_id": "tkt-225659fa",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+        "socketId": "Mvr1DuQ5-PG3_0qPAAAE",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707196583-a5pt4x",
+      "timestamp": "2026-11-03T11:59:56.583Z",
+      "ticket_id": "tkt-225659fa",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+        "socketId": "BQd7TAvEqj08_Pc-AAAF",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707197738-v4ad39",
+      "timestamp": "2026-11-03T11:59:57.738Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "GI-KlUQeD8AYgCo9AAAG",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707210056-bjx6iq",
+      "timestamp": "2026-11-03T12:00:10.056Z",
+      "ticket_id": "tkt-dbae5688",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 3356,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (3356 min)"
+      }
+    },
+    {
+      "id": "evt-1793707210071-pra19u",
+      "timestamp": "2026-11-03T12:00:10.071Z",
+      "ticket_id": "tkt-dbae5688",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707211033-upe78h",
+      "timestamp": "2026-11-03T12:00:11.033Z",
+      "ticket_id": "tkt-5ba4b897",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-007 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707212804-ot7glk",
+      "timestamp": "2026-11-03T12:00:12.804Z",
+      "ticket_id": "tkt-5ba4b897",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793707212814-qhwa3s",
+      "timestamp": "2026-11-03T12:00:12.814Z",
+      "ticket_id": "tkt-5ba4b897",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707213566-zcagc3",
+      "timestamp": "2026-11-03T12:00:13.566Z",
+      "ticket_id": "tkt-40e3ba22",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-008 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707214707-fjgkt8",
+      "timestamp": "2026-11-03T12:00:14.707Z",
+      "ticket_id": "tkt-40e3ba22",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793707214713-2tj4pn",
+      "timestamp": "2026-11-03T12:00:14.713Z",
+      "ticket_id": "tkt-40e3ba22",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707215522-b1ukdy",
+      "timestamp": "2026-11-03T12:00:15.522Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-009 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707216302-mfpwf4",
+      "timestamp": "2026-11-03T12:00:16.302Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793707216317-crtvut",
+      "timestamp": "2026-11-03T12:00:16.317Z",
+      "ticket_id": "tkt-4d25d26c",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707217050-kgvtl9",
+      "timestamp": "2026-11-03T12:00:17.050Z",
+      "ticket_id": "tkt-c07aafc5",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-010 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707218574-m8jog5",
+      "timestamp": "2026-11-03T12:00:18.574Z",
+      "ticket_id": "tkt-c07aafc5",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793707218602-z9ccmj",
+      "timestamp": "2026-11-03T12:00:18.602Z",
+      "ticket_id": "tkt-c07aafc5",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707219403-krtlwm",
+      "timestamp": "2026-11-03T12:00:19.403Z",
+      "ticket_id": "tkt-a9d66bc1",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-001 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707220270-1jip15",
+      "timestamp": "2026-11-03T12:00:20.270Z",
+      "ticket_id": "tkt-a9d66bc1",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793707220288-ih3z8b",
+      "timestamp": "2026-11-03T12:00:20.289Z",
+      "ticket_id": "tkt-a9d66bc1",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707221282-ikw85j",
+      "timestamp": "2026-11-03T12:00:21.282Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-002 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707229833-tm2roj",
+      "timestamp": "2026-11-03T12:00:29.833Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "STAGE_COMPLETED",
+      "payload": {
+        "stage_name": "Triagem & Classificação de Risco",
+        "durationMinutes": 1,
+        "notes": "",
+        "message": "Etapa Triagem & Classificação de Risco concluída (1 min)"
+      }
+    },
+    {
+      "id": "evt-1793707229843-oujdr2",
+      "timestamp": "2026-11-03T12:00:29.843Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "STAGE_TRANSFERRED",
+      "payload": {
+        "previous_stage": "Triagem & Classificação de Risco",
+        "next_stage": "Consulta Médica",
+        "message": "Encaminhado para a fila de Consulta Médica"
+      }
+    },
+    {
+      "id": "evt-1793707230766-kiezjy",
+      "timestamp": "2026-11-03T12:00:30.766Z",
+      "ticket_id": "tkt-225659fa",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-triagem",
+      "event_type": "TICKET_CALLED",
+      "payload": {
+        "counter": "Sala de Triagem / Enfermagem",
+        "operator": "Enfª. Mariana Souza",
+        "stage_name": "Triagem & Classificação de Risco",
+        "call_count": 1,
+        "message": "PA-003 chamado para Sala de Triagem / Enfermagem (Enfª. Mariana Souza)"
+      }
+    },
+    {
+      "id": "evt-1793707376438-5tt6ai",
+      "timestamp": "2026-11-03T12:02:56.438Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "7qY8xYX-bW7OLv5RAAAJ",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793707379713-s72rnk",
+      "timestamp": "2026-11-03T12:02:59.713Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "7kH5h-T9CrXM1WuIAAAK",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793713154888-kn1mf4",
+      "timestamp": "2026-11-03T13:39:14.888Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "6PefS7hXFNxywLHgAAAL",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
+      }
+    },
+    {
+      "id": "evt-1793717295240-nxsf38",
+      "timestamp": "2026-11-03T14:48:15.240Z",
+      "ticket_id": "tkt-e5167556",
+      "tenant_id": "clinica-sao-rafael",
+      "stage_id": "stg-consulta",
+      "event_type": "QR_TRACKER_OPENED",
+      "payload": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "socketId": "qyUoZcUAAcv4SR81AAAM",
+        "message": "Paciente abriu o acompanhamento em tempo real via QR-Code"
       }
     }
   ],

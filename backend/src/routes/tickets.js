@@ -43,15 +43,20 @@ module.exports = function (io, wsHub) {
 
       const initialStage = stages[0];
 
-      // Sequential display number for today
+      // Sequential display number for today (never duplicate active codes)
       const today = new Date().toISOString().slice(0, 10);
       const todayTickets = store.data.tickets.filter(t => 
         t.tenant_id === tenant.id && 
         t.service_id === service.id && 
         t.created_at.startsWith(today)
       );
-      const sequence = todayTickets.length + 1;
-      const displayCode = `${service.code_prefix}-${String(sequence).padStart(3, '0')}`;
+      let sequence = todayTickets.length + 1;
+      let displayCode = `${service.code_prefix}-${String(sequence).padStart(3, '0')}`;
+      const activeCodes = new Set(store.data.tickets.filter(t => t.tenant_id === tenant.id && t.status !== 'completed' && t.status !== 'cancelled').map(t => t.display_code));
+      while (activeCodes.has(displayCode)) {
+        sequence++;
+        displayCode = `${service.code_prefix}-${String(sequence).padStart(3, '0')}`;
+      }
 
       // Generate secure unique tracking token
       const trackingToken = `tk_${uuidv4().replace(/-/g, '').slice(0, 8)}`;
@@ -69,6 +74,8 @@ module.exports = function (io, wsHub) {
           const hostIp = getLocalIp();
           const port = process.env.PORT || 5000;
           clientUrl = `http://${hostIp}:${port}`;
+        }
+      }
         }
       }
       const trackingUrl = `${clientUrl}/track/${trackingToken}`;
@@ -222,6 +229,14 @@ module.exports = function (io, wsHub) {
       timestamp: new Date().toISOString()
     });
 
+    // Emit direct call event to patient mobile
+    io.to(`ticket:${ticket.tracking_token}`).emit('ticket_called', {
+      ticket: updated,
+      counter: counterLabel,
+      operator,
+      call_count: updated.call_count
+    });
+
     // Update patient mobile & desks via WebSocket
     wsHub.broadcastTicketUpdate(ticket.id);
 
@@ -237,6 +252,7 @@ module.exports = function (io, wsHub) {
     const currentStage = store.getStageById(ticket.current_stage_id);
 
     const updated = store.updateTicket(ticket.id, {
+      status: 'called',
       call_count: (ticket.call_count || 0) + 1,
       called_at: new Date().toISOString()
     });
@@ -264,6 +280,15 @@ module.exports = function (io, wsHub) {
       priority: ticket.priority,
       isRepeat: true,
       timestamp: new Date().toISOString()
+    });
+
+    // Emit direct recall event to patient mobile
+    io.to(`ticket:${ticket.tracking_token}`).emit('ticket_called', {
+      ticket: updated,
+      counter: ticket.assigned_counter,
+      operator: ticket.assigned_operator,
+      call_count: updated.call_count,
+      isRepeat: true
     });
 
     wsHub.broadcastTicketUpdate(ticket.id);

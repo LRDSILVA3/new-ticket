@@ -10,15 +10,17 @@ const store = require('./db/store');
 const setupWebSocket = require('./socket');
 const tenantsRouter = require('./routes/tenants');
 const ticketsRouterFactory = require('./routes/tickets');
+const integrationRouterFactory = require('./routes/integration');
 
 const app = express();
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 
 // Enable CORS
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key']
 }));
 
 app.use(express.json());
@@ -37,6 +39,7 @@ const wsHub = setupWebSocket(io);
 // Mount API routes
 app.use('/api/tenants', tenantsRouter);
 app.use('/api/tickets', ticketsRouterFactory(io, wsHub));
+app.use('/api/v1/integration', integrationRouterFactory(io, wsHub));
 
 // Health check and system metadata
 app.get('/api/health', (req, res) => {
@@ -45,7 +48,7 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     tenantsCount: store.getTenants().length,
     activeTicketsCount: store.data.tickets.filter(t => t.status !== 'completed' && t.status !== 'cancelled').length,
-    version: '1.0.0-multitenant-queue'
+    version: '1.2.0-headless-multitenant-saas'
   });
 });
 
@@ -65,10 +68,11 @@ if (fs.existsSync(frontendDist)) {
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`=======================================================`);
-  console.log(`🚀 NextQueue Multi-Tenant Server Running:`);
-  console.log(`   Local URL:    http://localhost:${PORT}`);
-  console.log(`   Network URL:  http://0.0.0.0:${PORT}`);
-  console.log(`   WebSocket:    Ready on port ${PORT}`);
+  console.log(`🚀 NextQueue Multi-Tenant & Headless Server Running:`);
+  console.log(`   Local URL:        http://localhost:${PORT}`);
+  console.log(`   Network URL:      http://0.0.0.0:${PORT}`);
+  console.log(`   Integration API:  /api/v1/integration`);
+  console.log(`   WebSocket:        Ready on port ${PORT}`);
   console.log(`=======================================================`);
 });
 

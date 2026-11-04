@@ -15,8 +15,9 @@ function setupWebSocket(io) {
         return;
       }
 
-      const room = `ticket:${trackingToken}`;
-      socket.join(room);
+      socket.join(`ticket:${trackingToken}`);
+      socket.join(`ticket:${ticket.id}`);
+      console.log(`[WS] Socket ${socket.id} joined rooms for ${ticket.display_code} (${ticket.customer_name})`);
 
       // Log the event that the patient scanned and opened the QR tracker
       store.logEvent({

@@ -65,21 +65,28 @@ Sistema completo para gestão de filas e roteamento de pacientes/clientes com ac
 
 ### Iniciar o Sistema (Servidor Unificado: API + WebSocket + Frontend)
 ```bash
-cd backend
-node src/server.js
+# Opção 1: Inicialização padrão local
+npm start
+
+# Opção 2: Iniciar servidor + túnel Cloudflare em 1 clique
+# Dê duplo clique em: start-cloudflare.bat
+# ou execute em terminais separados:
+npm start
+npm run tunnel
 ```
+
 O servidor iniciará em:
 - **Local:** `http://localhost:5000`
 - **Rede Local (Wi-Fi):** `http://192.168.1.12:5000` *(IP detectado automaticamente)*
+- **Internet / 4G (Cloudflare Tunnel):** `https://<seu-tunnel>.trycloudflare.com`
 
 ---
 
-## 📱 Testando no Celular Físico
+## 🌐 Testando de Qualquer Lugar com Cloudflare
 
-1. Conecte seu celular na mesma rede Wi-Fi do computador.
-2. Abra no computador: `http://localhost:5000`
-3. Vá na aba **Totem** e clique em **Emitir Minha Ficha com QR Code**.
-4. Aponte a câmera do seu celular para o QR Code na tela do computador.
-5. O celular abrirá a tela de acompanhamento ao vivo via WebSocket!
-6. Na aba **Operador**, clique em **Chamar Próximo** e veja seu celular tocar e alertar na mesma hora!
-
+1. Abra a URL pública do Cloudflare gerada pelo tunnel (ex: `https://xxxx.trycloudflare.com`).
+2. Acesse no celular ou computador de qualquer lugar (mesmo fora do seu Wi-Fi, via 4G/5G).
+3. Vá na aba **Totem** e emita uma senha.
+4. O **QR Code** será gerado automaticamente com o link HTTPS público do Cloudflare!
+5. Escaneie com qualquer celular: a tela de acompanhamento mobile abre na hora conectada ao WebSocket!
+6. No computador (ou outro celular), vá na aba **Operador** e clique em **Chamar Próximo**: o celular emitirá o toque sonoro e o aviso de tela instantaneamente!

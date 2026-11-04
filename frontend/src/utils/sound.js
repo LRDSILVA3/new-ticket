@@ -117,3 +117,15 @@ class SoundManager {
 
 export const soundManager = new SoundManager();
 
+
+
+// Auto unlock audio on any user touch/interaction
+if (typeof window !== 'undefined') {
+  const unlockAudio = () => {
+    soundManager.init();
+    window.removeEventListener('click', unlockAudio);
+    window.removeEventListener('touchstart', unlockAudio);
+  };
+  window.addEventListener('click', unlockAudio);
+  window.addEventListener('touchstart', unlockAudio);
+}

@@ -125,6 +125,28 @@ export default function OperatorDesk({ tenantSlug }) {
     }
   };
 
+  // Call specific ticket from queue
+  const handleCallSpecific = async (ticketId) => {
+    try {
+      setActionLoading(true);
+      soundManager.playChime();
+      const updated = await api.callTicket(ticketId, counterLabel, operatorName);
+      setActiveTicket(updated);
+      setClinicalNotes('');
+      fetchQueue();
+      setActionLoading(false);
+    } catch (err) {
+      alert(err.message || 'Erro ao chamar paciente');
+      setActionLoading(false);
+    }
+  };
+
+  // Dismiss current ticket from desk to free the counter
+  const handleDismiss = () => {
+    setActiveTicket(null);
+    setClinicalNotes('');
+  };
+
   // Call Next Ticket
   const handleCallNext = async () => {
     if (queueTickets.length === 0) {
@@ -499,13 +521,23 @@ export default function OperatorDesk({ tenantSlug }) {
                       </div>
                     </div>
 
-                    <div className="text-right">
-                      <span className="text-[11px] text-teal-400 font-semibold block">
-                        ~{tkt.waitInfo?.estimatedWaitMinutes || 5} min
-                      </span>
-                      <span className="text-[10px] text-slate-500 block">
-                        espera estimada
-                      </span>
+                    <div className="flex items-center gap-3">
+                      <div className="text-right hidden sm:block">
+                        <span className="text-[11px] text-teal-400 font-semibold block">
+                          ~{tkt.waitInfo?.estimatedWaitMinutes || 5} min
+                        </span>
+                        <span className="text-[10px] text-slate-500 block">
+                          espera estimada
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => handleCallSpecific(tkt.id)}
+                        disabled={actionLoading}
+                        className="py-2 px-3 bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-1 shadow-md shadow-teal-500/20 cursor-pointer transition-all"
+                      >
+                        <Bell className="w-3.5 h-3.5" />
+                        Chamar
+                      </button>
                     </div>
                   </div>
                 ))}

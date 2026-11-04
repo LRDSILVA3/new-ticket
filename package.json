@@ -4,9 +4,9 @@
   "description": "Multi-Tenant Multi-Service Queue & QR Tracking System",
   "scripts": {
     "start": "node backend/src/server.js",
+    "tunnel": "cloudflared tunnel --url http://localhost:5000",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build"
   }
 }
-

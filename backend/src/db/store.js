@@ -209,6 +209,23 @@ class Store {
       } else {
         this.save();
       }
+
+      // Ensure every tenant has api_key, styling and webhook defaults
+      let modified = false;
+      this.data.tenants.forEach(t => {
+        if (!t.api_key) {
+          t.api_key = `nq_live_${t.slug || t.id}_${Math.random().toString(36).substr(2, 9)}${Math.random().toString(36).substr(2, 9)}`;
+          modified = true;
+        }
+        if (!t.accent_color) { t.accent_color = '#06b6d4'; modified = true; }
+        if (!t.ticket_theme) { t.ticket_theme = 'dark'; modified = true; }
+        if (!t.ticket_banner_message) { t.ticket_banner_message = 'Apresente um documento com foto ao ser chamado(a).'; modified = true; }
+        if (!t.ticket_footer_message) { t.ticket_footer_message = 'Wi-Fi da Unidade: Visitantes | Dúvidas? Procure a recepção.'; modified = true; }
+        if (!t.logo_icon) { t.logo_icon = '🏥'; modified = true; }
+        if (t.webhook_url === undefined) { t.webhook_url = ''; modified = true; }
+        if (t.webhook_secret === undefined) { t.webhook_secret = ''; modified = true; }
+      });
+      if (modified) this.save();
     } catch (err) {
       console.error('Error initializing store, falling back to default:', err);
       this.data = defaultData;
@@ -232,6 +249,31 @@ class Store {
     return this.data.tenants.find(t => t.slug === slug || t.id === slug);
   }
 
+  createTenant(tenantData) {
+    this.data.tenants.push(tenantData);
+    this.save();
+    return tenantData;
+  }
+
+  deleteTenant(id) {
+    const idx = this.data.tenants.findIndex(t => t.id === id || t.slug === id);
+    if (idx !== -1) {
+      const removed = this.data.tenants.splice(idx, 1)[0];
+      this.data.services = this.data.services.filter(s => s.tenant_id !== removed.id);
+      this.data.stages = this.data.stages.filter(st => st.tenant_id !== removed.id);
+      this.data.tickets = this.data.tickets.filter(t => t.tenant_id !== removed.id);
+      this.data.ticket_events = this.data.ticket_events.filter(e => e.tenant_id !== removed.id);
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
+  getTenantByApiKey(apiKey) {
+    if (!apiKey) return null;
+    return this.data.tenants.find(t => t.api_key === apiKey);
+  }
+
   updateTenant(id, updates) {
     const tenant = this.data.tenants.find(t => t.id === id || t.slug === id);
     if (!tenant) return null;
@@ -253,6 +295,25 @@ class Store {
     this.data.services.push(serviceData);
     this.save();
     return serviceData;
+  }
+
+  updateService(serviceId, updates) {
+    const service = this.data.services.find(s => s.id === serviceId);
+    if (!service) return null;
+    Object.assign(service, updates);
+    this.save();
+    return service;
+  }
+
+  deleteService(serviceId) {
+    const idx = this.data.services.findIndex(s => s.id === serviceId);
+    if (idx !== -1) {
+      this.data.services.splice(idx, 1);
+      this.data.stages = this.data.stages.filter(st => st.service_id !== serviceId);
+      this.save();
+      return true;
+    }
+    return false;
   }
 
   // --- Stages ---
